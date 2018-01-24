@@ -1,41 +1,54 @@
 require_relative "piece"
 
 class Board
-	def self.make_starting_grid
-		empty_board = Array.new(2) { Array.new(8) { Piece.new } }
-		empty_board += Array.new(4) { Array.new(8) { nil } }
-		empty_board += Array.new(2) { Array.new(8) { Piece.new } }
-	end
+  attr_reader :rows
 
-	attr_reader :grid
+  def initialize(fill_board = true)
+    @sentinel = nil
+    make_starting_grid(fill_board)
+  end
 
-	def initialize
-		@grid = Board.make_starting_grid
-	end
+  def [](pos)
+    row, col = pos
+    @rows[row][col]
+  end
 
-	def [](pos)
-		row, col = pos
-		grid[row][col]
-	end
+  def []=(pos, value)
+    row, col = pos
+    @rows[row][col] = value
+  end
 
-	def []=(pos, value)
-		row, col = pos
-		grid[row][col] = value
-	end
+  def move_piece(start_pos, end_pos)
+    piece = self[start_pos]
 
-	def move_piece(start_pos, end_pos)
-		start_row, start_col = start_pos
-		end_row, end_col = end_pos
+    #raise ArgumentError.new("There's no piece in that spot!") if piece.moves.include?(end_pos)
+    #raise ArgumentError.new("That's not a spot on the board!") unless
+    
+    move_piece!(start_pos, end_pos)
+  end
 
-		raise ArgumentError.new("There's no piece in that spot!") if grid[start_row][start_col].nil?
-		raise ArgumentError.new("That's not a spot on the board!") unless grid[end_row][end_col].nil?
+  def move_piece!(start_pos, end_pos)
+    piece = self[start_pos]
 
-		grid[end_row][end_col] = grid[start_row][start_col]
-		grid[start_row][start_col] = nil
-	end
+    self[end_pos] = piece
+    self[start_pos] = nil
+    
+    nil
+  end
 
-	def self.in_bounds?(pos)
-		row, col = pos
-		row.between?(0, 7) && col.between?(0, 7)
-	end
+  def self.in_bounds?(pos)
+    row, col = pos
+    row.between?(0, 7) && col.between?(0, 7)
+  end
+
+  private
+
+  attr_reader :sentinel
+
+  def make_starting_grid(fill_board)
+    empty_board = Array.new(2) { Array.new(8) { Piece.new } }
+    empty_board += Array.new(4) { Array.new(8) { nil } }
+    empty_board += Array.new(2) { Array.new(8) { Piece.new } }
+    empty_board
+  end
 end

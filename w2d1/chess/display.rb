@@ -5,13 +5,13 @@ require_relative "board"
 class Display
   attr_reader :cursor
 
-  def initialize
-    @board = Board.new
-    @cursor = Cursor.new([0, 0], @board)
+  def initialize(board)
+    @board = board
+    @cursor = Cursor.new([0, 0], board)
   end
 
   def build_grid
-    @board.grid.map.with_index do |row, i|
+    @board.rows.map.with_index do |row, i|
       build_row(row, i)
     end
   end
@@ -39,7 +39,6 @@ class Display
   def render
     system("clear")
     puts "Arrow keys, WASD, or vim to move, space or enter to confirm"
-
     build_grid.each { |row| puts row.join }
   end
 end
