@@ -36,10 +36,10 @@ class Cursor
   def initialize(cursor_pos, board)
     @cursor_pos = cursor_pos
     @board = board
-		@selected = false
+    @selected = false
   end
 
-	def toggle_selected
+  def toggle_selected
     @selected = !@selected
   end
 
@@ -50,12 +50,27 @@ class Cursor
 
   private
 
+  def handle_key(key)
+    case key
+    when :ctrl_c
+      exit 0
+    when :return, :space
+      toggle_selected
+      cursor_pos
+    when :left, :right, :up, :down
+      update_pos(MOVES[key])
+      nil
+    else
+      puts key
+    end
+  end
+
   def read_char
     STDIN.echo = false
     STDIN.raw!
 
-		input = STDIN.getc.chr
-		if input == "\e" then
+    input = STDIN.getc.chr
+    if input == "\e"
       input << STDIN.read_nonblock(3) rescue nil
       input << STDIN.read_nonblock(2) rescue nil
     end
@@ -66,23 +81,8 @@ class Cursor
     input
   end
 
-  def handle_key(key)
-		case key
-		when :return, :space
-			toggle_selected
-			cursor_pos
-		when :left || :right || :up || :down
-			update_pos(MOVES[key])
-			nil
-		when :ctrl_c
-			exit 0
-		else
-			puts key
-		end
-  end
-
   def update_pos(diff)
-		new_pos = [cursor_pos[0] + diff[0], cursor_pos[1] + diff[1]]
-		@cursor_pos = new_pos if board.in_bounds?(new_pos)
+    new_pos = [cursor_pos[0] + diff[0], cursor_pos[1] + diff[1]]
+    @cursor_pos = new_pos if board.valid_pos?(new_pos)
   end
 end
