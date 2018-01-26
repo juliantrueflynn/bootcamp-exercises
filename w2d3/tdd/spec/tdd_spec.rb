@@ -19,8 +19,23 @@ describe Array do
   end
 
   describe "#two_sum" do
-    it "Gets the sum of two numbers in array that equal zero, in order of index" do
-      expect([-1, 0, 2, -2, 1].two_sum).to eq([[0, 4], [2, 3]])
+    let(:array) { [-1, 0, 2, -2, 1] }
+    it "gets sum of two numbers in array that equal zero, in order of index" do
+      expect(array.two_sum).to eq([[0, 4], [2, 3]])
+    end
+
+    it "returns empty array if given empty array" do
+      expect([].two_sum).to eq([])
+    end
+
+    it "only 2 values allowed in each sub array" do
+      array.two_sum.map do |pair|
+        expect(pair.length).to eq(2)
+      end
+    end
+
+    it "is a sorted array" do
+      expect(array.two_sum).to eq(array.two_sum.sorted)
     end
   end
 end
