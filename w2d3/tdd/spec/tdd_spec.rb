@@ -17,4 +17,30 @@ describe Array do
       array.my_uniq
     end
   end
+
+  describe "#two_sum" do
+    it "Gets the sum of two numbers in array that equal zero, in order of index" do
+      expect([-1, 0, 2, -2, 1].two_sum).to eq([[0, 4], [2, 3]])
+    end
+  end
+end
+
+describe "#my_transpose" do
+  it "Convert array between row-oriented and column-oriented representations"
+end
+
+describe "#stock_picker" do
+  it "Takes array and outputs most profitable stock pairs"
+end
+
+describe "TowersOfHanoi" do
+  subject(:game) { TowersOfHanoi.new }
+
+  describe "#move" do
+    it "Moves last item from array (tower) and moves to new array (tower)"
+  end
+
+  describe "#won?" do
+    it "Determine if towers are in winning pattern"
+  end
 end
