@@ -50,7 +50,7 @@ describe "TowersOfHanoi" do
       end
     end
 
-    it "stores as array of arrays (2d array)"
+    it "stores as array of arrays (2d array)" do
       expect(towers).to be_an_instance_of(Array)
       towers.each { |tower| expect(tower).to be_an_instance_of(Array) }
     end
