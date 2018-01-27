@@ -1,4 +1,5 @@
 require "card"
+require "rspec"
 
 describe Card do
   subject(:card) { Card.new }

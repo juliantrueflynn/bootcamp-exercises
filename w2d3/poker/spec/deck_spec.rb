@@ -1,4 +1,5 @@
 require "deck"
+require "rspec"
 
 describe Deck do
   subject(:deck) { Deck.new }
