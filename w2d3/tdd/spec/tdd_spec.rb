@@ -19,23 +19,28 @@ describe Array do
   end
 
   describe "#two_sum" do
-    let(:array) { [-1, 0, 2, -2, 1] }
     it "gets sum of two numbers in array that equal zero, in order of index" do
-      expect(array.two_sum).to eq([[0, 4], [2, 3]])
+      expect([5, 1, -7, -5].two_sum).to eq([[0, 3]])
     end
 
-    it "returns empty array if given empty array" do
+    it "returns [] if given []" do
       expect([].two_sum).to eq([])
     end
 
-    it "only 2 values allowed in each sub array" do
-      array.two_sum.map do |pair|
-        expect(pair.length).to eq(2)
-      end
+    it "finds pairs with same element" do
+      expect([5, -5, -5]).to eq([[0, 1], [0, 2]])
+    end
+
+    it "returns [] when no pair is found" do
+      expect([1, 1, 4, 3, 5]).to eq([])
+    end
+
+    it "won't find spurious zeros" do
+      expect([0, 1, 2, 3]).to eq([])
     end
 
     it "is a sorted array" do
-      expect(array.two_sum).to eq(array.two_sum.sorted)
+      expect([-1, 0, 2, -2, 1].two_sum).to eq([[0, 4], [2, 3]])
     end
   end
 end
