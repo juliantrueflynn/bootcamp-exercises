@@ -48,3 +48,12 @@ def slow_dance_octopus(move, dance_tiles)
 
   nil
 end
+
+def constant_dance_octopus(move, dance_tiles)
+  dance_moves = Hash.new
+  dance_tiles.each_with_index do |dance, idx|
+    dance_moves[dance] = idx
+  end
+
+  dance_moves[move]
+end
