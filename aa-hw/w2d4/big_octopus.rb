@@ -39,3 +39,12 @@ def merge_dominant_octopus(left, right)
 
   merged_array
 end
+
+def slow_dance_octopus(move, dance_tiles)
+  # dance_tiles.index(move) <-- easiest way
+  dance_tiles.each_index do |idx|
+    return idx if dance_tiles[idx] == move
+  end
+
+  nil
+end
