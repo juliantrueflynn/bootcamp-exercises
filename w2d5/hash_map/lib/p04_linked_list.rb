@@ -41,82 +41,66 @@ class LinkedList
   end
 
   def first
-    @head.next
+    empty? ? nil : @head.next
   end
 
   def last
-    @tail.prev
+    empty? ? nil : @tail.prev
   end
 
   def empty?
-    first == @tail
+    @head.next == @tail
   end
 
   def get(key)
-    current_node = first
-    until current_node == @tail
-      return current_node.val if current_node.key == key
-      current_node = current_node.next
-    end
-
+    each { |node| return node.val if node.key == key }
     nil
   end
 
   def include?(key)
-    current_node = first
-    until current_node == @tail
-      return true if current_node.key == key
-      current_node = current_node.next
-    end
-
-    false
+    any? { |node| node.key == key }
   end
 
   def append(key, val)
-    old_node = last
     new_node = Node.new(key, val)
+    
+    old_node = @tail.prev
     new_node.next = @tail
-    new_node.prev = last
+    new_node.prev = @tail.prev
     old_node.next = new_node    
     @tail.prev = new_node
+
+    new_node
   end
 
   def update(key, val)
-    return unless include?(key)
-
-    current_node = first
-    until current_node == @tail
-      current_node.val = val if current_node.key == key
-      current_node = current_node.next
+    each do |node|
+      if node.key == key
+        node.val = val
+        return node;
+      end
     end
   end
 
   def remove(key)
-    return unless include?(key)
-
-    current_node = first
-    until current_node == @tail
-      if current_node.key == key
-        prev_node = current_node.prev
-        next_node = current_node.next
-        prev_node.next = next_node
-        next_node.prev = prev_node        
+    each do |node|
+      if node.key == key
+        node.remove
+        return node.val
       end
-
-      current_node = current_node.next
     end
   end
 
-  def each(&prc)
-    current_node = first
+  def each
+    current_node = @head.next
     until current_node == @tail
-      prc.call(current_node)
+      yield current_node
       current_node = current_node.next
     end
   end
 
   # uncomment when you have `each` working and `Enumerable` included
-  # def to_s
-  #   inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
-  # end
+  def to_s
+    inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
+  end
 end

@@ -1,4 +1,3 @@
-require "byebug"
 require_relative 'p02_hashing'
 
 class HashSet
@@ -10,11 +9,12 @@ class HashSet
   end
 
   def insert(key)
-    unless include?(key.hash)
-      self[key.hash] << key
-      @count += 1
-      resize! if @count == num_buckets
-    end
+    return false if include?(key)
+    self[key.hash] << key
+    @count += 1
+    resize! if num_buckets < @count
+
+    key
   end
 
   def include?(key)
@@ -22,19 +22,11 @@ class HashSet
   end
 
   def remove(key)
-    if include?(key)
-      self[key.hash].delete(key)
-      @count -= 1
-    end
-    
-    key
+    return nil unless include?(key)
+    self[key.hash].delete(key)
   end
 
   private
-
-  def [](num)
-    @store[num % num_buckets] << num
-  end
 
   def num_buckets
     @store.length
@@ -44,8 +36,11 @@ class HashSet
     old_store = @store
     @count = 0
     @store = Array.new(num_buckets * 2) { Array.new }
-    old_store.each do |arr|
-      arr.each { |key| self[key.hash] << key }
-    end
+
+    old_store.flatten.each { |key| insert(key) }
+  end
+
+  def [](num)
+    @store[num % num_buckets]
   end
 end
