@@ -56,6 +56,8 @@ INSERT INTO
   questions (title, body, author_id)
 VALUES
   ('Hello world #1', 'Badum tshhhh', 1),
+  ('Another post by me', 'This is 2nd post by me', 1),
+  ('Lucky number 3 post', 'This is 3rd and final post by me', 1),
   ('Hello world #2', 'Blah blah blah blah blah', 2),
   ('Hello world #3', 'Lorem ipsum text', 2);
 
@@ -74,4 +76,4 @@ VALUES
 INSERT INTO
   question_likes (question_id, author_id)
 VALUES
-  (1, 2), (1, 3), (1, 4), (2, 1), (2, 3), (2, 4), (3, 1);
+  (1, 2), (1, 3), (1, 4), (2, 2), (2, 3), (2, 4), (3, 2), (4, 1), (5, 1);
