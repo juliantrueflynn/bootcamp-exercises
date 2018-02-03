@@ -2,6 +2,7 @@ require_relative 'database'
 require_relative 'user'
 require_relative 'reply'
 require_relative 'question_follow'
+require_relative 'question_like'
 
 class Question
   def self.all
