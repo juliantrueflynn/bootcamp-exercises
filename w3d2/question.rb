@@ -40,6 +40,10 @@ class Question
     QuestionFollow.most_followed_questions(limit)
   end
 
+  def self.most_liked(limit)
+    QuestionLike.most_liked_questions(limit)
+  end    
+
   attr_accessor :id, :title, :body, :author_id
 
   def initialize(options = {})

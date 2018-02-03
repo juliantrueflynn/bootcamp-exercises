@@ -1,7 +1,8 @@
 require_relative 'database'
-require_relative 'question_follow'
 require_relative 'reply'
 require_relative 'question'
+require_relative 'question_like'
+require_relative 'question_follow'
 
 class User
   def self.all
@@ -55,5 +56,26 @@ class User
 
   def followed_questions
     QuestionFollow.followed_questions_for_user_id(id)
+  end
+
+  def liked_questions
+    QuestionLike.liked_questions_for_user_id(id)
+  end
+
+  def average_karma
+    data = QuestionsDatabase.instance.execute(<<-SQL, id)
+      SELECT
+        (CAST(COUNT(likes.question_id) AS FLOAT) / COUNT(DISTINCT(likes.question_id))) AS karma
+      FROM
+        users u
+      LEFT OUTER JOIN
+        questions q ON u.id = q.author_id
+      LEFT OUTER JOIN
+        question_likes likes ON q.id = likes.question_id
+      WHERE
+        q.author_id = id
+    SQL
+
+    data.first['karma']
   end
 end
