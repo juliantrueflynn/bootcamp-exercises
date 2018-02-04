@@ -110,4 +110,26 @@ class Reply
 
     data.map { |obj| Reply.new(obj) }    
   end
+
+  def save
+    if id.nil?
+      QuestionsDatabase.instance.execute(<<-SQL, body, parent_id, question_id, author_id)
+        INSERT INTO
+          replies
+        VALUES
+          (?, ?, ?, ?)
+      SQL
+
+      @id = QuestionsDatabase.instance.last_insert_row_id
+    else
+      QuestionsDatabase.instance.execute(<<-SQL, body, parent_id, question_id, author_id, id)
+        UPDATE
+          replies
+        SET
+          body = ?, parent_id = ?, question_id = ?, author_id = ?
+        WHERE
+          id = ?
+      SQL
+    end
+  end
 end
