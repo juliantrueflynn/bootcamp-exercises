@@ -38,6 +38,9 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'pry-rails'
+  gem 'activerecord-import'
+  gem 'shoulda-matchers'
+  gem 'db-query-matchers'
 end
 
 group :development do
