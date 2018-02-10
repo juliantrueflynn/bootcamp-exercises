@@ -9,6 +9,8 @@ class Artwork < ApplicationRecord
     class_name: :User,
     foreign_key: :artist_id,
     primary_key: :id
+  
+  has_many :comments
 
   def self.artworks_for_user_id(user_id)
     Artwork
