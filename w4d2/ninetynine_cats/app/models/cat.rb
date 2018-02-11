@@ -1,4 +1,8 @@
+require 'action_view'
+
 class Cat < ApplicationRecord
+  include ActionView::Helpers::DateHelper
+
   CAT_COLORS = %w(red yellow orange black brown tan white).freeze
 
   validates :birth_date, :color, :name, :sex, :description, presence: true
