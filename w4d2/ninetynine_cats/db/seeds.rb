@@ -23,13 +23,6 @@ end
 Cat.import! cats
 
 rental_requests = []
-start_date = Time.at(rand * Time.now.to_i).to_date
-rental_requests << CatRentalRequest.new(
-  :cat_id => 1,
-  :start_date => start_date.to_date,
-  :end_date => start_date.change(month: (1..9).to_a.sample).to_date,
-  :status => "APPROVED"
-)
 3.times do |i|
   start_date = Time.at(rand * Time.now.to_i)
 
