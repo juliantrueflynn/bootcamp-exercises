@@ -1,11 +1,11 @@
-<% if action == :edit %>
+<% if cat.persisted? %>
   <% action_url = cat_url(cat) %>
 <% else %>
   <% action_url = cats_url %>
 <% end %>
 
 <form action="<%= action_url %>" method="post">
-  <% if action == :edit %>
+  <% if cat.persisted? %>
     <input type="hidden" name="_method" value="PATCH">
   <% end %>
 
