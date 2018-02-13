@@ -20,4 +20,17 @@ class CatRentalRequest < ApplicationRecord
       errors[:approved_request] << 'can not overlap with other Approved status'
     end
   end
+
+  def overlapping_pending_requests
+    overlapping_requests.where(status: "PENDING")
+  end
+
+  def approve!
+    status = "APPROVED"
+    overlapping_pending_requests.each { |request| request.deny! }
+  end
+
+  def deny!
+    status = "DENIED"
+  end
 end

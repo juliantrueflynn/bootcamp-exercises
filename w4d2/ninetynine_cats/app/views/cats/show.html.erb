@@ -23,3 +23,22 @@
     </tr>
   </tbody>
 </table>
+
+<table>
+  <thead>
+    <th>User</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Status</th>
+  </thead>
+  <tbody>
+    <% @cat.cat_rental_requests.each do |request| %>
+      <tr>
+        <td><%= request.cat_id %></td>
+        <td><%= request.start_date %></td>
+        <td><%= request.end_date %></td>
+        <td><%= request.status %></td>
+      </tr>
+    <% end %>    
+  </tbody>
+</table>

@@ -37,6 +37,10 @@ class CatsController < ApplicationController
       render :edit
     end
   end
+
+  def current_cat
+
+  end
   
   private
 
