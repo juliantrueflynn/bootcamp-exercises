@@ -1,8 +1,9 @@
-<!-- app/views/sessions/new.html.erb -->
+<!-- app/views/session/new.html.erb -->
 
 <h1>Log In</h1>
 
 <form action="/session" method="post">
+
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
   <label for="user_username">Username</label>
