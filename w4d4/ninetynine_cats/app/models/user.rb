@@ -1,9 +1,8 @@
 class User < ApplicationRecord
   require 'bcrypt'
 
-  validates :username, :password_digest, :session_token, presence: true
-  validates :username, uniqueness: true
-  validates :session_token, uniqueness: true
+  validates :username, presence: true
+  validates :password_digest, presence: { message: 'Password cannot be blank' }
 
   after_initialize :ensure_session_token
 
