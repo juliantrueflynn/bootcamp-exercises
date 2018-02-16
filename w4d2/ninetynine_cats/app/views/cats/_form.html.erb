@@ -1,0 +1,42 @@
+<% if cat.persisted? %>
+  <% action_url = cat_url(cat) %>
+<% else %>
+  <% action_url = cats_url %>
+<% end %>
+
+<form action="<%= action_url %>" method="post">
+  <% if cat.persisted? %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
+
+  <label for="name">Name</label>
+  <input id="name" type="text" name="cat[name]" value="<%= cat.name %>">
+
+  <br/>
+
+  <label for="birth_date">Birth Date</label>
+  <input id="birth_date" type="date" name="cat[birth_date]" value="<%= cat.birth_date %>">
+
+  <br/>
+
+  <label for="sex">Sex</label>
+  <input id="sex" type="text" name="cat[sex]" value="<%= cat.sex %>">
+
+  <br/>
+
+  <label for="color">Color</label>
+  <select id="color" name="cat[color]">
+    <option disabled>-- select color --</option>
+    <% Cat::CAT_COLORS.each_with_index do |color, i| %>
+      <option value="<%= color %>" <%= (color == Cat::CAT_COLORS[i] ) ? "selected" : "" %>><%= color %></option>
+    <% end %>
+  </select>
+
+  <br/>
+
+  <label for="description">Description</label>
+  <textarea id="description" name="cat[description]"><%= cat.description %></textarea>
+
+  <br/>
+  <input type="submit" value="Submit">
+</form>
