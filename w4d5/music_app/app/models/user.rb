@@ -19,7 +19,7 @@ class User < ApplicationRecord
     SecureRandom::urlsafe_base64(16)
   end
 
-  def self.reset_session_token!
+  def reset_session_token!
     self.session_token = self.class.generate_session_token
     self.save!
     self.session_token
