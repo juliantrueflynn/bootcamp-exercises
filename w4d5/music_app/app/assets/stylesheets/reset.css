@@ -1,0 +1,9 @@
+body {
+    margin: 0;
+}
+
+input[type="submit"], input[type="button"] {
+    border-width: 0;
+    font-size: 1rem;
+    cursor: pointer;
+}
