@@ -1,0 +1,44 @@
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: .625rem 0;
+    font-family: $sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.left-nav > ul,
+.right-nav > ul {
+    margin: 0;
+}
+
+.left-nav > ul > li {
+    display: inline-block;
+    border: 1px solid transparent;
+    margin-right: .625rem;
+    padding: .4rem;
+}
+
+.right-nav > ul > li {
+    display: inline-block;
+    border: 1px solid transparent;
+}
+
+.right-nav > ul > li:last-of-type {
+    margin-right: 0;
+}
+
+.left-nav > ul > li:hover,
+.right-nav > ul > li:last-of-type:hover {
+    background-color: $lightest-gray;
+    border-color: $lightest-gray;
+}
+
+.left-nav span {
+    padding: .4rem;
+}
+
+.right-nav i {
+    font-size: .9rem;
+    padding: .4rem;
+}
