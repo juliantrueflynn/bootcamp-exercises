@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  helper_method :current_user
+
   def log_in_user!(user)
     @current_user = user
     session[:session_token] = user.session_token
@@ -11,5 +13,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by_session_token(session[:session_token])
   end
 
-  helper_method :current_user
+  def logged_in?
+    ! self.current_user.nil?
+  end
 end
