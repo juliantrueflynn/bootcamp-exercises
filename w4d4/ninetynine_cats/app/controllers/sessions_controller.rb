@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     if user.nil?
       render json: 'Wrong credentials'
     else
-      user.reset_sessions_token!
+      user.reset_session_token!
       redirect_to cats_url
     end
   end
