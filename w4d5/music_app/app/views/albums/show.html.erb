@@ -17,3 +17,26 @@
   </tbody>
 </table>
 
+<% unless @album.band.albums.empty? %>
+  <h2>Other Albums</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Year</th>
+        <th>Live Album</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @album.band.albums.each do |album| %>
+        <tr>
+          <td><%= album.title %></td>
+          <td><%= album.year %></td>
+          <td><%= album.live_album %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
