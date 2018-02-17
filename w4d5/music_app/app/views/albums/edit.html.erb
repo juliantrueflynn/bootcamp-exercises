@@ -1,2 +1,38 @@
-<h1>Albums#edit</h1>
-<p>Find me in app/views/albums/edit.html.erb</p>
+<h1>Edit Album</h1>
+
+<form action="<%= album_url(@album) %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="patch">
+
+  <div class="form-group">
+    <label for="album_title">Title</label>
+    <input id="album_title" type="text" name="album[title]" value="<%= @album.title %>">
+  </div>
+
+  <div class="form-group">
+    <label for="album_year">Year</label>
+    <input id="album_year" type="text" name="album[year]" value="<%= @album.year %>">
+  </div>
+
+  <div class="form-group">
+    <label for="album_live">
+      <input id="album_live" type="radio" name="album[live_album]" value="true" <% @album.live_album ? "checked" : "" %>>
+      Live Album
+    </label>
+
+    <label for="studio_album">
+      <input id="studio_album" type="radio" name="album[live_album]" value="false" <%= ! @album.live_album ? "checked" : "" %>>
+      Studio Album
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label for="album_band">Band</label>
+    <select id="album_band" name="album[band_id]">
+      <option disabled selected>-- select band --</option>
+      <% Band.all.each do |band| %>
+        <option value="<%= band.id %>" <%= band.id == @album.band_id ? "selected" : "" %>><%= band.name %></option>
+      <% end %>
+    </select>
+  </div>
+</form>
