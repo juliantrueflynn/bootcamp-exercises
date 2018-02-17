@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  get 'tracks/new'
+
+  get 'tracks/create'
+
+  get 'tracks/edit'
+
+  get 'tracks/show'
+
+  get 'tracks/update'
+
+  get 'tracks/destroy'
+
   resources :users
   resource :session
   resources :bands do
