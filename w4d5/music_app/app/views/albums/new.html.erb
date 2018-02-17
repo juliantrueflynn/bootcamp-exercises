@@ -1,0 +1,38 @@
+<h1>Add Album</h1>
+
+<form action="<%= albums_url %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <% if @album.band_id %>
+    <input type="hidden" name="album[band_id]" value="<%= @album.band_id %>">
+  <% else %>
+    <div class="form-group">
+      <label for="album_band">Band</label>
+      <input id="album_band" type="text" name="album[band_id]">
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label for="album_title">Title</label>
+    <input id="album_title" type="text" name="album[title]">
+  </div>
+
+  <div class="form-group">
+    <label for="album_year">Year</label>
+    <input id="album_year" type="text" name="album[year]">
+  </div>
+
+  <div class="form-group">
+    <label for="album_live">
+      <input id="album_live" type="radio" name="album[live_album]" value="true">
+      Live Album
+    </label>
+
+    <label for="studio_album">
+      <input id="studio_album" type="radio" name="album[live_album]" value="false">
+      Studio Album
+    </label>
+  </div>
+
+  <input type="submit" value="Add Album" class="btn btn-submit">
+</form>
