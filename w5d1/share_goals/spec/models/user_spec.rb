@@ -25,6 +25,11 @@ RSpec.describe User, type: :model do
         user.save
       end
 
+      it 'initializes with session_token' do
+        empty_user = User.new
+        expect(empty_user.session_token).not_to be_nil
+      end
+
       it 'returns user with matching email and password' do
         expect(User.find_by_credentials(user.email, user.password)).to eq(user)
       end
