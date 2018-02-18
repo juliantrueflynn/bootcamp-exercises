@@ -1,0 +1,2 @@
+class ViewedGoal < ApplicationRecord
+end
