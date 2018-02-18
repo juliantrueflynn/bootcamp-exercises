@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :comments, class_name: :UserComment
   has_many :viewed_goals, class_name: :ViewedGoal
 
+  after_initialize :ensure_session_token
+
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     return nil if user.nil?
@@ -34,5 +36,9 @@ class User < ApplicationRecord
     self.session_token = User.generate_session_token
     self.save!
     self.session_token
+  end
+
+  def ensure_session_token
+    self.session_token ||= self.class.generate_session_token
   end
 end
