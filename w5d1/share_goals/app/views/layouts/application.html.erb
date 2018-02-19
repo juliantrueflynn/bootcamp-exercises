@@ -9,6 +9,14 @@
   </head>
 
   <body>
+    <div class="user-nav">
+      <% if logged_in? %>
+        <%= current_user.email %>
+        <%= link_to 'Logout', session_url, method: :delete %>
+      <% else %>
+        <%= link_to 'Sign in', new_session_url %>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>

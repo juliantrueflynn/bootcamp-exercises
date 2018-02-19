@@ -23,7 +23,7 @@ RSpec.describe UsersController, type: :controller do
     context 'with valid params' do
       it 'redirects to users page' do
         post :create, params: { user: FactoryBot.attributes_for(:user) }
-        expect(response).to redirect_to(users_url)
+        expect(response).to redirect_to(user_url(user))
       end
     end
   end

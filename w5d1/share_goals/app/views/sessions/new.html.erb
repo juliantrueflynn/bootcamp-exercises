@@ -1,6 +1,6 @@
-<h1>Sign up</h1>
+<h1>Sign In</h1>
 
-<%= form_tag(users_url) do %>
+<%= form_tag(session_url) do %>
   <%= label_tag('user[email]', 'Email') %>
   <%= text_field(:user, :email) %>
 
@@ -11,5 +11,5 @@
 
   <br/>
 
-  <%= submit_tag 'Sign up' %>
+  <%= submit_tag 'Sign in' %>
 <% end %>
