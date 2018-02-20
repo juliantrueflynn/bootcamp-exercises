@@ -12,14 +12,12 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.author_id = current_user.id
+    @post = current_user.posts.new(post_params)
 
     if @post.save
       redirect_to post_url(@post)
     else
       flash.now[:errors] = @post.errors.full_messages
-      render :new
     end
   end
 
@@ -48,7 +46,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :url, :sub_id, :author_id)
+    params.require(:post).permit(:title, :content, :url, :author_id, sub_ids: [])
   end
 
   def is_current_user_author?
@@ -56,6 +54,6 @@ class PostsController < ApplicationController
   end
 
   def require_post_author_to_edit
-    redirect_to subs_url unless is_current_user_author?
+    redirect_to subs_url if is_current_user_author?
   end
 end
