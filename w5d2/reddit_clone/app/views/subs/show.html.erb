@@ -2,3 +2,9 @@
 
 <p><%= @sub.description %></p>
 <p>Admin: <%= @sub.creator_id %></p>
+
+<ul>
+  <% @sub.posts.each do |post| %>
+    <li><%= link_to post.title, post_url(post) %></li>
+  <% end %>
+</ul>

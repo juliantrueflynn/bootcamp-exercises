@@ -1,0 +1,25 @@
+<h1>Add new post</h1>
+
+<%= form_for @post do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>  
+  </div>
+
+  <div>
+    <%= f.label :url %>
+    <%= f.text_field :url %>
+  </div>
+
+  <div>
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+
+  <div>
+    <%= f.label :sub_id %>
+    <%= f.text_field :sub_id %>
+  </div>
+
+  <%= f.submit 'Add post' %>
+<% end %>
