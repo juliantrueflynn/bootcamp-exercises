@@ -1,0 +1,15 @@
+<h1>Edit</h1>
+
+<%= form_for @sub do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <%= f.submit 'Update' %>
+<% end %>
