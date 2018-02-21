@@ -25,6 +25,7 @@ class ControllerBase
     @res.location = url
     @res.status = 302
     @already_built_response = true
+    session.store_session(@res)
   end
 
   # Populate the response with content.
@@ -35,15 +36,22 @@ class ControllerBase
     @res['Content-Type'] = content_type
     @res.body = [content]
     @already_built_response = true
+    session.store_session(@res)
   end
 
   # use ERB and binding to evaluate templates
   # pass the rendered html to render_content
   def render(template_name)
+    file_name = "#{template_name}.html.erb"
+    controller_name = self.class.to_s.underscore
+    
+    template_file = File.open("./views/#{controller_name}/#{file_name}")
+    render_content(ERB.new(template_file.read).result(binding), 'text/html')
   end
 
   # method exposing a `Session` object
   def session
+    @session ||= Session.new(req)
   end
 
   # use this with the router to call action_name (:index, :show, :create...)
