@@ -52,7 +52,3 @@ function fibonacci(n) {
 }
 
 console.log(fibonacci(13));
-
-function hammerTime(time) {
-    alert(`${time} is hammertime!`);
-}
