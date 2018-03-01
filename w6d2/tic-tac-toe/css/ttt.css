@@ -1,0 +1,27 @@
+html {
+    background-color: #F2EFEA;
+}
+
+h1 {
+    text-align: center;
+}
+
+.grid {
+    width: 300px;
+    margin: 30px auto;
+    padding: 0;
+    list-style: none;
+}
+
+.item {
+    float: left;
+    width: 94px;
+    height: 94px;
+    border: 3px solid #F2EFEA;
+    cursor: pointer;
+    background: #FFF;
+}
+
+.item.hover {
+    background-color: #FFEE93;
+}
