@@ -60,30 +60,20 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const FollowToggle = __webpack_require__(1);
-
-$( () => {
-    $('button.follow-toggle').each((i, btn) => new FollowToggle(btn));
-});
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-const APIUtil = __webpack_require__(2);
+const APIUtil = __webpack_require__(1);
 
 class FollowToggle {
-    constructor(el) {
+    constructor(el, options = {}) {
         this.$el = $(el);
-        this.userId = this.$el.data('user-id');
-        this.followState = this.$el.data('initial-follow-state');
+        this.userId = this.$el.data('user-id') || options.userId;
+        this.followState = this.$el.data('initial-follow-state') || options.followState;
 
         this.render();
         this.$el.on('click', this.handleClick.bind(this));
@@ -137,7 +127,7 @@ class FollowToggle {
 module.exports = FollowToggle;
 
 /***/ }),
-/* 2 */
+/* 1 */
 /***/ (function(module, exports) {
 
 const APIUtil = {
@@ -150,10 +140,83 @@ const APIUtil = {
             dataType: 'json',
             method
         })
+    ),
+
+    searchUsers: query => (
+        $.ajax({
+            url: `/users/search`,
+            method: 'GET',
+            dataType: 'json',
+            data: { query }
+        })
     )
 };
 
 module.exports = APIUtil;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const FollowToggle = __webpack_require__(0);
+const UsersSearch = __webpack_require__(3);
+
+$( () => {
+    $('button.follow-toggle').each((i, btn) => new FollowToggle(btn, {}));
+    $('.users-search').each((i, search) => new UsersSearch(search));
+});
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const APIUtil = __webpack_require__(1);
+const FollowToggle = __webpack_require__(0);
+
+class UsersSearch {
+    constructor(el) {
+        this.$el = $(el);
+        this.$input = this.$el.find($('.user-search-input'));
+        this.$ul = this.$el.find('.users');
+
+        this.$input.on('input', this.handleInput.bind(this));
+    }
+
+    handleInput(event) {
+        if (this.$input.val() === '') {
+            this.renderResults([]);
+            return;
+        }
+
+        APIUtil.searchUsers(this.$input.val())
+            .then(users => this.renderResults(users));
+    }
+
+    renderResults(users) {
+        this.$ul.empty();
+
+        $.each(users, (i, user) => {
+            const $followBtn = $('<button></button>');
+
+            new FollowToggle($followBtn, {
+                userId: user.id,
+                followState: user.followed ? 'followed' : 'unfollowed'
+            });
+
+            let $a = $('<a></a>');
+            $a.text(`${user.username}`);
+            $a.attr('href', `/users/${user.id}`);
+
+            const $li = $('<li></li>');
+            $li.append($followBtn);
+            $li.append($a);
+
+            this.$ul.append($li);
+        });
+    }
+}
+
+module.exports = UsersSearch;
 
 /***/ })
 /******/ ]);
