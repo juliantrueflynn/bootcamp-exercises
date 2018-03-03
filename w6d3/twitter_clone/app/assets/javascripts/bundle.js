@@ -149,6 +149,15 @@ const APIUtil = {
             dataType: 'json',
             data: { query }
         })
+    ),
+
+    createTweet: tweet => (
+        $.ajax({
+            url: '/tweets',
+            method: 'POST',
+            dataType: 'json',
+            data: tweet.serialize()
+        })
     )
 };
 
@@ -160,10 +169,12 @@ module.exports = APIUtil;
 
 const FollowToggle = __webpack_require__(0);
 const UsersSearch = __webpack_require__(3);
+const TweetCompose = __webpack_require__(4);
 
 $( () => {
     $('button.follow-toggle').each((i, btn) => new FollowToggle(btn, {}));
     $('.users-search').each((i, search) => new UsersSearch(search));
+    $('.tweet-compose').each((i, tweet) => new TweetCompose(tweet));
 });
 
 /***/ }),
@@ -217,6 +228,54 @@ class UsersSearch {
 }
 
 module.exports = UsersSearch;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const APIUtil = __webpack_require__(1);
+
+class TweetCompose {
+    constructor(el) {
+        this.$el = $(el);
+        this.$inputs = this.$el.find(':input');
+
+        this.$el.on('input', 'textarea', this.charCounter);
+        this.$el.on('submit', this.submit.bind(this));
+    }
+
+    charCounter(event) {
+        const $content = $(event.currentTarget);
+        const numCharsLeft = 140 - $content.val().length;
+        $('.chars-left').text(`${numCharsLeft} characters left`);
+    }
+
+    submit(event) {
+        event.preventDefault();
+        APIUtil.createTweet(this.$el)
+            .then(this.clearInput.bind(this))
+            .then(this.handleSuccess.bind(this));
+        this.$inputs.each((i, input) => {
+            $(input).prop('disabled', true);  
+        });
+    }
+
+    clearInput(formValue) {
+        this.$inputs.each((i, input) => {
+            $(input).not('[type="submit"]').val('');
+            $(input).prop('disabled', false);  
+        });
+
+        return formValue;
+    }
+
+    handleSuccess(tweet) {
+        const feedId = this.$el.data('tweets-ul');
+        $(feedId).prepend(`<li>${JSON.stringify(tweet)}</li>`);
+    }
+}
+
+module.exports = TweetCompose;
 
 /***/ })
 /******/ ]);
