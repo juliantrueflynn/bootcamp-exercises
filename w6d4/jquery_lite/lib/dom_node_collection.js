@@ -4,7 +4,7 @@ class DOMNodeCollection {
     }
 
     each(callback) {
-        this.each(callback);
+        this.doms.forEach(callback);
     }
 
     html(str) {
