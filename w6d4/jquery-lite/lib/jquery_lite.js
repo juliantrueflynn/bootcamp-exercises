@@ -67,7 +67,11 @@
 /* 0 */
 /***/ (function(module, exports) {
 
+function $l(selector) {
 
+}
+
+window.$l = $l;
 
 /***/ })
 /******/ ]);
