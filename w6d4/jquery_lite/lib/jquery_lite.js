@@ -172,11 +172,11 @@ class DOMNodeCollection {
     }
 
     remove() {
-        this.doms.forEach((dom, i) => {
+        let removed = this.doms.forEach((dom, i) => {
             dom.remove();
         });
 
-        return new DOMNodeCollection();
+        return new DOMNodeCollection([]);
     }
 }
 
