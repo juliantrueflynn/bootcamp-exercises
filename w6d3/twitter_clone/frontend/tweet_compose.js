@@ -1,4 +1,5 @@
 const APIUtil = require('./api_util');
+var indextest = 0;
 
 class TweetCompose {
     constructor(el) {
@@ -7,6 +8,8 @@ class TweetCompose {
 
         this.$el.on('input', 'textarea', this.charCounter);
         this.$el.on('submit', this.submit.bind(this));
+        this.$el.on('click', '.add-mention', this.newUserSelect);
+        this.$el.on('click', '.remove-mentioned-user', this.removeMentionedUser);
     }
 
     charCounter(event) {
@@ -27,9 +30,11 @@ class TweetCompose {
 
     clearInput(formValue) {
         this.$inputs.each((i, input) => {
-            $(input).not('[type="submit"]').val('');
+            $(input).not('[type="submit"], .add-mention').val('');
             $(input).prop('disabled', false);  
         });
+
+        this.$el.find('.mentioned-users').empty();
 
         return formValue;
     }
@@ -37,6 +42,23 @@ class TweetCompose {
     handleSuccess(tweet) {
         const feedId = this.$el.data('tweets-ul');
         $(feedId).prepend(`<li>${JSON.stringify(tweet)}</li>`);
+    }
+    
+    newUserSelect(event) {
+        const $userUl = $('.mentioned-users');
+        const del = '<a class="remove-mentioned-user" href="#">X</a>';
+        let selectOpts = "";
+        $.each(window.users, (i, u) => {
+            selectOpts += `<option value="${u.id}">${u.username}</option>`;
+        });
+    
+        $userUl.append(`<li><select name="tweet[mentioned_user_ids][]">${selectOpts}</select> ${del}</li>`);
+    }
+
+    removeMentionedUser(event) {
+        event.preventDefault();
+
+        $(event.currentTarget).parent().remove();
     }
 }
 

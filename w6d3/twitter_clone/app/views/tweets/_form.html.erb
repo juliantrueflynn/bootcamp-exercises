@@ -12,16 +12,15 @@
   </label>
   <br>
 
-  <label>
-    Mention
-    <select name="tweet[mentioned_user_ids][]">
-      <option></option>
-      <% User.all.each do |user| %>
-        <option value="<%= user.id %>"><%= user.username %></option>
-      <% end %>
-    </select>
-  </label>
-  <br>
+  <script type="text/javascript">
+    <% users = [] %>
+    <% User.all.each { |u| users << {id: u.id, username: u.username} } %>
+    window.users = <%= users.to_json.html_safe %>
+  </script>
 
-  <input type="Submit" value="Post Tweet!">
+  <ul class="mentioned-users"></ul>
+
+  <input type="button" class="add-mention" data-index="0" value="Add mention">
+
+  <input type="submit" value="Post Tweet!">
 </form>
