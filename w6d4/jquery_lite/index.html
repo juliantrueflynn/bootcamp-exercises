@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" type="text/css" media="screen" href="main.css" />-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <!-- Test divs -->
+    <div class="test-class">
+        <span class="subspan">1</span>
+        <span>4</span>
+    </div>
+    <div class="test-class">
+        <span>2</span>
+        <div class="subdiv">2</div>
+    </div>
+    
+    <script src="lib/jquery_lite.js"></script>
+    <script type="text/javascript">
+        // Remove after debugging!
+        window.$l = $l;
+        test = $l('.test-class');
+    </script>
+</body>
+</html>
