@@ -3,18 +3,22 @@ class DOMNodeCollection {
         this.doms = doms;
     }
 
+    each(callback) {
+        this.each(callback);
+    }
+
     html(str) {
         if (str === undefined) {
             return this.doms[0].innerHTML;
         }
         
-        this.doms.forEach((dom) => {
+        this.each((dom) => {
             dom.innerHTML = str;
         });
     }
 
     empty() {
-        this.doms.forEach((dom) => {
+        this.each((dom) => {
             dom.innerHTML = "";
         });
     }
@@ -24,7 +28,7 @@ class DOMNodeCollection {
             node = node.outerHTML;
         }
         
-        this.doms.forEach((dom) => {
+        this.each((dom) => {
             dom.innerHTML += node;
         });
     }
@@ -34,7 +38,7 @@ class DOMNodeCollection {
             return this.doms[0].getAttribute(k);
         }
 
-        this.doms.forEach((dom) => {
+        this.each((dom) => {
             let elAttr = document.createAttribute(k);
             elAttr.value = v;
             dom.setAttributeNode(elAttr);
@@ -43,18 +47,18 @@ class DOMNodeCollection {
 
     addClass(classNames) {
         let classes = classNames.split(" ");
-        this.doms.forEach(dom => dom.classList.add(...classes));
+        this.each(dom => dom.classList.add(...classes));
     }
 
     removeClass(classNames) {
         let classes = classNames.split(" ");
-        this.doms.forEach(dom => dom.classList.remove(...classes));
+        this.each(dom => dom.classList.remove(...classes));
     }
 
     children() {
         let allChildren = [];
 
-        this.doms.forEach((dom) => {
+        this.each((dom) => {
             let domChildren = Array.from(dom.children);
             allChildren = allChildren.concat(domChildren);
         });
@@ -65,7 +69,7 @@ class DOMNodeCollection {
     parent() {
         let parents = [];
 
-        this.doms.forEach((dom) => {
+        this.each((dom) => {
             parents = parents.push(dom.parentElement);
         });
 
@@ -75,7 +79,7 @@ class DOMNodeCollection {
     find(selector) {
         let results = [];
 
-        this.doms.forEach((dom) => {
+        this.each((dom) => {
             const selected = dom.querySelectorAll(selector);
             if (selected.length > 0) {
                 results = results.concat(selected);
@@ -86,11 +90,7 @@ class DOMNodeCollection {
     }
 
     remove() {
-        let removed = this.doms.forEach((dom, i) => {
-            dom.remove();
-        });
-
-        return new DOMNodeCollection([]);
+        this.each(node => node.parentNode.removeChild(node));
     }
 }
 
