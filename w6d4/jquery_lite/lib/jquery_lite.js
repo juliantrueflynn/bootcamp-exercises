@@ -178,6 +178,20 @@ class DOMNodeCollection {
     remove() {
         this.each(node => node.parentNode.removeChild(node));
     }
+
+    on(eventType, listenerCb) {
+        this.each((node) => {
+            node.addEventListener(eventType, listenerCb);
+            node.eventCb = listenerCb;
+        });
+    }
+
+    off(eventType, listenerCb) {
+        this.each((node) => {
+            let cb = listenerCb || node.eventCb;
+            node.removeEventListener(eventType, cb);
+        });
+    }
 }
 
 module.exports = DOMNodeCollection;
