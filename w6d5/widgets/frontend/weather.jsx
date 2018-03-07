@@ -10,13 +10,9 @@ class Weather extends React.Component {
   }
 
   componentWillMount() {
-    this.setState({
-      currentLoc: navigator.geolocation.getCurrentPosition,
-    });
   }
 
   render() {
-    console.log(this.state.currentLoc);
     return (
       <div className="weather">
         <h2>Weather</h2>

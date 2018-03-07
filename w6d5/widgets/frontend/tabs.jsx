@@ -26,9 +26,9 @@ class Tabs extends React.Component {
     });
 
     return (
-      <div>
+      <div className="tabs">
         <h2>Tabs</h2>
-        <div className="tabs">
+        <div>
           <div className="tab-header">
             {panes}
           </div>

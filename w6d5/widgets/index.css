@@ -1,9 +1,15 @@
-.clock {
+body {
   font-family: "Open Sans", sans-serif;
+}
+
+.clock {
+  padding: 15px;
 }
 
 .tabs {
   width: 33.33333333%;
+  display: inline-block;
+  padding: 15px;
 }
 
 .tabs .tab-header span {
@@ -20,7 +26,7 @@
   font-size: .80rem;
   text-transform: uppercase;
   font-family: "Open Sans", sans-serif;
-  background-color: #f9f9f9
+  background-color: #F9F9F9;
 }
 
 .tabs .tab-header span:first-child {
@@ -38,12 +44,33 @@
 
 .tabs .tab-header .active {
   color: #111;
-  background-color: #eee;
-  border-bottom: 1px solid #eee;
+  background-color: #EEE;
+  border-bottom: 1px solid #EEE;
 }
 
 .tabs .tab-content {
   padding: 1.5rem 1rem;
   border: 1px solid #999;
-  background-color: #eee;
+  background-color: #EEE;
+}
+
+.autocomplete {
+  width: 25%;
+  display: inline-block;
+  padding: 15px;
+}
+
+.autocomplete-body {
+  background-color: #B07BAC;
+  border: 1px solid #815A7E;
+  padding: 1.5rem 1rem;
+}
+
+.autocomplete .search-ul {
+  margin-bottom: 0;
+}
+
+.autocomplete .search-ul > li {
+  cursor: pointer;
+  color: #FFF;
 }
