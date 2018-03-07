@@ -1,3 +1,49 @@
 .clock {
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
+}
+
+.tabs {
+  width: 33.33333333%;
+}
+
+.tabs .tab-header span {
+  cursor: pointer;
+  padding: .4rem 1rem;
+  color: #555;
+  display: inline-block;
+  border-top: 1px solid #999;
+  border-left: 1px solid #999;
+  border-bottom: 1px solid #999;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  margin-bottom: -1px;
+  font-size: .80rem;
+  text-transform: uppercase;
+  font-family: "Open Sans", sans-serif;
+  background-color: #f9f9f9
+}
+
+.tabs .tab-header span:first-child {
+  margin-left: 0;
+}
+
+.tabs .tab-header span:last-child {
+  margin-right: 0;
+  border-right: 1px solid #999;
+}
+
+.tabs .tab-header span:not(.active):hover {
+  background-color: rgba(0,0,0,.05);
+}
+
+.tabs .tab-header .active {
+  color: #111;
+  background-color: #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.tabs .tab-content {
+  padding: 1.5rem 1rem;
+  border: 1px solid #999;
+  background-color: #eee;
 }
