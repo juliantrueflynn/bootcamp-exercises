@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import store from './store/store';
 
 class Root extends React.Component {
   render() {
@@ -10,5 +11,6 @@ class Root extends React.Component {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  window.store = store;
   ReactDOM.render(<Root />, document.getElementById('content'));
 });
