@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app';
+import store from './store/store';
+import Root from './components/root';
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(<App />, document.getElementById('content'));
+  ReactDOM.render(<Root store={ store } />, document.getElementById('content'));
 });
