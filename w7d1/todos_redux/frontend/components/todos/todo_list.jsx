@@ -1,9 +1,9 @@
 import React from 'react';
 import TodoListItem from './todo_list_item';
+import TodoForm from './todo_form';
 
 class TodoList extends React.Component {
   render() {
-    console.log(this.props);
     const { todos, receiveTodo } = this.props;
     
     const todosList = todos.map(todo => (
@@ -11,9 +11,12 @@ class TodoList extends React.Component {
     ));
 
     return (
-      <ul className="todos-ul">
-        {todosList}
-      </ul>
+      <div>
+        <ul className="todos-ul">
+          {todosList}
+        </ul>
+        <TodoForm receiveTodo={receiveTodo} />
+      </div>
     );
   }
 }
