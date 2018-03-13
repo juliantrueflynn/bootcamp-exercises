@@ -13,7 +13,9 @@ class TodoForm extends React.Component {
 
     this.props.receiveTodo({
       id: uniqueId(),
-      title: event.target.title.value
+      title: event.target.title.value,
+      body: event.target.body.value,
+      done: false
     });
 
     event.target.title.value = "";
@@ -24,7 +26,8 @@ class TodoForm extends React.Component {
       <div>
         <h2>Add New Todo</h2>
         <form onSubmit={ this.handleSubmit }>
-          <input type="text" name="title" placeholder="Title" />
+          <input type="text" name="title" placeholder="Title" /><br/>
+          <textarea name="body" placeholder="Body"></textarea><br/>
           <input type="submit" value="Add" />
         </form>
       </div>
