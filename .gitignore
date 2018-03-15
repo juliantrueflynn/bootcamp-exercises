@@ -1,3 +1,5 @@
 **/tmp
 */tmp
 /course
+**.bundle.js
+**.bundle.map.js
