@@ -42,6 +42,6 @@ class Rainbow extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default Rainbow;

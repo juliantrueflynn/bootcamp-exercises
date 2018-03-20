@@ -12585,8 +12585,6 @@ var Rainbow = function (_React$Component) {
   return Rainbow;
 }(_react2.default.Component);
 
-;
-
 exports.default = Rainbow;
 
 /***/ }),
