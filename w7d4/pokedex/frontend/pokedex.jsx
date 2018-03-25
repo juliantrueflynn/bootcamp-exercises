@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/root';
 
-import { requestAllPokemon } from './actions/pokemon_actions';
-import { selectAllPokemon } from './reducers/selectors';
+import itemsReducer from './reducers/items_reducer';
+import { fetchSinglePokemon } from './util/api_util';
+import { receiveSinglePokemon, requestSinglePokemon } from './actions/pokemon_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   const rootEl = document.getElementById('root');
@@ -12,8 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.getState = store.getState;
   window.dispatch = store.dispatch;
-  window.requestAllPokemon = requestAllPokemon;
-  window.selectAllPokemon = selectAllPokemon;
+  window.itemsReducer = itemsReducer;
+  window.fetchSinglePokemon = fetchSinglePokemon;
+  window.receiveSinglePokemon = receiveSinglePokemon;
+  window.requestSinglePokemon = requestSinglePokemon;
 
   ReactDOM.render(<Root store={ store } />, rootEl);
 });
