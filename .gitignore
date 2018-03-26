@@ -1,6 +1,6 @@
 tmp/
 course/
 node_modules/
-.bundle.js
-.bundle.map.js
+bundle.js
+bundle.map.js
 prep_assessments/
