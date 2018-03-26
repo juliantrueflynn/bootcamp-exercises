@@ -1,6 +1,5 @@
-**/tmp
-*/tmp
-/course
-**.bundle.js
-**.bundle.map.js
+tmp/
+course/
+.bundle.js
+.bundle.map.js
 prep_assessments/
