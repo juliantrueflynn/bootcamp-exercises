@@ -1,7 +1,7 @@
 import * as APIUtilSession from '../util/session_api_util';
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
-export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
+export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 
 export const receiveCurrentUser = currentUser => ({
   type: RECEIVE_CURRENT_USER,
@@ -9,26 +9,29 @@ export const receiveCurrentUser = currentUser => ({
 });
 
 export const receiveErrors = errors => ({
-  type: RECEIVE_ERRORS,
+  type: RECEIVE_SESSION_ERRORS,
   errors
 });
 
-export const signup = user => (
+export const signup = user => dispatch => (
   APIUtilSession.signup(user).then(
-    currentUser => receiveCurrentUser(currentUser),
-    errors => receiveErrors(errors)
+    currentUser => dispatch(receiveCurrentUser(currentUser)),
+    errors => dispatch(receiveErrors(errors.responseJSON))
   )
 );
 
-export const login = user => (
+export const login = user => dispatch => (
   APIUtilSession.login(user).then(
-    currentUser => receiveCurrentUser(currentUser),
-    errors => receiveErrors(errors)
+    currentUser => dispatch(receiveCurrentUser(currentUser)),
+    errors => dispatch(receiveErrors(errors.responseJSON))
   )
 );
 
-export const logout = () => (
+export const logout = () => dispatch => (
   APIUtilSession.logout().then(
-    currentUser => receiveCurrentUser(null)
+    currentUser => {
+      dispatch(receiveErrors([]));
+      return dispatch(receiveCurrentUser(null));
+    }
   )
 );
