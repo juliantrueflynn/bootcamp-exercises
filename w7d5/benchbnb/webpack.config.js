@@ -1,6 +1,7 @@
 var path = require('path');
 
 module.exports = {
+  mode: "development",
   context: __dirname,
   entry: './frontend/bench_bnb.jsx',
   output: {
