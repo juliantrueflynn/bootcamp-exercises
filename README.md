@@ -1,3 +1,3 @@
-# Bootcamp exercises & Homework
+# Online App Academy exercises
 
-3 months of battling dragons
+My exercise solutions. I'm done with the course so this is an archive.
